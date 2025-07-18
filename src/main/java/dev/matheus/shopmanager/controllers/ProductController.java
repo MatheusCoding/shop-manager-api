@@ -29,4 +29,16 @@ public class ProductController {
     public ResponseEntity<List<Product>> getAllProducts() {
         return ResponseEntity.ok(service.getAllProducts());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
+        service.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody @Valid ProductRequest request){
+        Product product = service.updateProduct(id, request);
+        return ResponseEntity.ok(product);
+    }
 }
